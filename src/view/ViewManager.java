@@ -3,18 +3,56 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package view;
+import control.GudangControl;
+import control.ManagerControl;
+import exception.InputKosongException;
+import exception.NoKodeException;
+import javax.swing.JOptionPane;
 import model.Gudang;
+import model.Manager;
 /**
  *
  * @author acer1
  */
 public class ViewManager extends javax.swing.JFrame {
-
+    private GudangControl gudangControl;
+    private ManagerControl managerControl;
+    String action = null;
     /**
      * Creates new form ViewGudang
      */
     public ViewManager() {
         initComponents();
+        setComponent(false);
+        setEditDeleteBtn(false);
+        managerControl = new ManagerControl();
+        showManager();
+        setGudangToDropdown();
+    }
+    
+    public void setComponent(boolean value) {
+        input1.setEnabled(value);
+        input2.setEnabled(value);
+        dropdown.setEnabled(value);
+        
+        tambahButton.setEnabled(value);
+        simpanButton.setEnabled(value);
+    }
+    
+    public void setEditDeleteBtn(boolean value) {
+        hapusButton.setEnabled(value);
+    }
+    
+    public void clearText() {
+        input1.setText("");
+        input2.setText("");
+    }
+    
+    public void setGudangToDropdown() {
+        listGudang = gudangControl.showListGudang();
+        for (int i = 1; i < listGudang.size(); i++){
+            dropdown.addItem(listGudang.get(i));
+        } 
     }
 
     /**

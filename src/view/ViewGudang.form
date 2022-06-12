@@ -353,6 +353,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="input1">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="input1ActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="inputLabel2">
           <Properties>
@@ -372,11 +375,17 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Tambah"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tambahButtonActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="hapusButton">
           <Properties>
             <Property name="text" type="java.lang.String" value="Hapus"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="hapusButtonActionPerformed"/>
+          </Events>
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane1">
           <AuxValues>
@@ -397,6 +406,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Simpan"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="simpanButtonActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

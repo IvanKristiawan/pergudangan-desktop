@@ -10,6 +10,6 @@ package exception;
  */
 public class NoKodeException extends Exception {
     public String message() {
-        return "Nomor induk dosen harus terdiri dari 5 karakter!";
+        return "Kode harus terdiri dari 5 karakter!";
     }
 }

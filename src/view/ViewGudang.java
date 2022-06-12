@@ -3,18 +3,63 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package view;
-
+import control.GudangControl;
+import exception.InputKosongException;
+import exception.NoKodeException;
+import javax.swing.JOptionPane;
+import model.Gudang;
 /**
  *
  * @author acer1
  */
 public class ViewGudang extends javax.swing.JFrame {
-
+    private GudangControl gudangControl;
+    String action = null;
     /**
      * Creates new form ViewGudang
      */
     public ViewGudang() {
         initComponents();
+        setComponent(false);
+        setEditDeleteBtn(false);
+        gudangControl = new GudangControl();
+        showGudang();
+    }
+    
+    public void setComponent(boolean value) {
+        input1.setEnabled(value);
+        input2.setEnabled(value);
+        input3.setEnabled(value);
+        
+        tambahButton.setEnabled(value);
+        simpanButton.setEnabled(value);
+    }
+    
+    public void setEditDeleteBtn(boolean value) {
+        hapusButton.setEnabled(value);
+    }
+    
+    public void clearText() {
+        input1.setText("");
+        input2.setText("");
+        input3.setText("");
+    }
+    
+    public void showGudang() {
+        outputArea.setText(gudangControl.showDataGudang());
+    }
+    
+    public void InputKosongException() throws InputKosongException {
+        if(input1.getText().isEmpty() || input2.getText().isEmpty()
+            || input3.getText().isEmpty()) {
+                throw new InputKosongException();
+            }
+    }
+    
+    public void NoKodeException() throws NoKodeException {
+        if(input1.getText().length() != 5) {
+            throw new NoKodeException();
+        }
     }
 
     /**
@@ -189,19 +234,40 @@ public class ViewGudang extends javax.swing.JFrame {
 
         inputLabel1.setText("Kode Gudang");
 
+        input1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                input1ActionPerformed(evt);
+            }
+        });
+
         inputLabel2.setText("Nama Gudang");
 
         inputLabel3.setText("Alamat Gudang");
 
         tambahButton.setText("Tambah");
+        tambahButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tambahButtonActionPerformed(evt);
+            }
+        });
 
         hapusButton.setText("Hapus");
+        hapusButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hapusButtonActionPerformed(evt);
+            }
+        });
 
         outputArea.setColumns(20);
         outputArea.setRows(5);
         jScrollPane1.setViewportView(outputArea);
 
         simpanButton.setText("Simpan");
+        simpanButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                simpanButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout ContainerLayout = new javax.swing.GroupLayout(Container);
         Container.setLayout(ContainerLayout);
@@ -300,6 +366,57 @@ public class ViewGudang extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void tambahButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tambahButtonActionPerformed
+        // TODO add your handling code here:
+        setComponent(true);
+        clearText();
+        action = "Tambah";
+    }//GEN-LAST:event_tambahButtonActionPerformed
+
+    private void hapusButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hapusButtonActionPerformed
+        // TODO add your handling code here:
+        int getAnswer = JOptionPane.showConfirmDialog(rootPane,
+            "Apakah yakin ingin menghapus data ?", "Konfirmasi",
+            JOptionPane.YES_NO_OPTION);
+        
+        if(getAnswer == JOptionPane.YES_OPTION) {
+            try {
+                gudangControl.deleteDataGudang(input1.getText());
+                clearText();
+                showGudang();
+                JOptionPane.showMessageDialog(null, "Data berhasil dihapus!");
+            } catch(Exception e) {
+                System.out.println("Error : " + e.getMessage());
+            }
+        }
+    }//GEN-LAST:event_hapusButtonActionPerformed
+
+    private void input1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_input1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_input1ActionPerformed
+
+    private void simpanButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simpanButtonActionPerformed
+        // TODO add your handling code here:
+        try {
+            InputKosongException();
+            NoKodeException();
+            
+            Gudang d = new Gudang(input1.getText(), input2.getText(),
+                input3.getText());
+            if(action.equals("Tambah")) {
+                gudangControl.insertDataGudang(d);
+            }
+            clearText();
+            showGudang();
+            setComponent(false);
+            setEditDeleteBtn(false);
+        } catch(InputKosongException e) {
+            JOptionPane.showMessageDialog(this, e.message());
+        } catch(NoKodeException e) {
+            JOptionPane.showMessageDialog(this, e.message());
+        }
+    }//GEN-LAST:event_simpanButtonActionPerformed
 
     /**
      * @param args the command line arguments

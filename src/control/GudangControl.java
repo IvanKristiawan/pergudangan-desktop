@@ -31,4 +31,9 @@ public class GudangControl {
     public void deleteDataGudang(String noInduk) {
         dDao.deleteGudang(noInduk);
     }
+    
+    public List<Gudang> showListGudang() {
+        List<Gudang> dataGudang = dDao.showGudang();
+        return dataGudang;
+    }
 }
