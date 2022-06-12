@@ -3,18 +3,63 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package view;
-
+import control.SupplierControl;
+import exception.InputKosongException;
+import exception.NoKodeException;
+import javax.swing.JOptionPane;
+import model.Supplier;
 /**
  *
  * @author acer1
  */
 public class ViewSupplier extends javax.swing.JFrame {
- 
+    private SupplierControl supplierControl;
+    String action = null;
     /**
      * Creates new form ViewGudang
      */
     public ViewSupplier() {
         initComponents();
+        setComponent(false);
+        setEditDeleteBtn(false);
+        supplierControl = new SupplierControl();
+        showSupplier();
+    }
+    
+    public void setComponent(boolean value) {
+        input1.setEnabled(value);
+        input2.setEnabled(value);
+        input3.setEnabled(value);
+        
+        tambahButton.setEnabled(value);
+        simpanButton.setEnabled(value);
+    }
+    
+    public void setEditDeleteBtn(boolean value) {
+        hapusButton.setEnabled(value);
+    }
+    
+    public void clearText() {
+        input1.setText("");
+        input2.setText("");
+        input3.setText("");
+    }
+    
+    public void showSupplier() {
+        outputArea.setText(supplierControl.showDataSupplier());
+    }
+    
+    public void InputKosongException() throws InputKosongException {
+        if(input1.getText().isEmpty() || input2.getText().isEmpty()
+            || input3.getText().isEmpty()) {
+                throw new InputKosongException();
+            }
+    }
+    
+    public void NoKodeException() throws NoKodeException {
+        if(input1.getText().length() != 5) {
+            throw new NoKodeException();
+        }
     }
 
     /**
@@ -197,10 +242,25 @@ public class ViewSupplier extends javax.swing.JFrame {
         jScrollPane1.setViewportView(outputArea);
 
         simpanButton.setText("Simpan");
+        simpanButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                simpanButtonActionPerformed(evt);
+            }
+        });
 
         hapusButton.setText("Hapus");
+        hapusButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hapusButtonActionPerformed(evt);
+            }
+        });
 
         tambahButton.setText("Tambah");
+        tambahButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tambahButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout ContainerLayout = new javax.swing.GroupLayout(Container);
         Container.setLayout(ContainerLayout);
@@ -299,6 +359,53 @@ public class ViewSupplier extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void tambahButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tambahButtonActionPerformed
+        // TODO add your handling code here:
+        setComponent(true);
+        clearText();
+        action = "Tambah";
+    }//GEN-LAST:event_tambahButtonActionPerformed
+
+    private void hapusButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hapusButtonActionPerformed
+        // TODO add your handling code here:
+        int getAnswer = JOptionPane.showConfirmDialog(rootPane,
+            "Apakah yakin ingin menghapus data ?", "Konfirmasi",
+            JOptionPane.YES_NO_OPTION);
+        
+        if(getAnswer == JOptionPane.YES_OPTION) {
+            try {
+                supplierControl.deleteDataSupplier(input1.getText());
+                clearText();
+                showSupplier();
+                JOptionPane.showMessageDialog(null, "Data berhasil dihapus!");
+            } catch(Exception e) {
+                System.out.println("Error : " + e.getMessage());
+            }
+        }
+    }//GEN-LAST:event_hapusButtonActionPerformed
+
+    private void simpanButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simpanButtonActionPerformed
+        // TODO add your handling code here:
+        try {
+            InputKosongException();
+            NoKodeException();
+            
+            Supplier d = new Supplier(input1.getText(), input2.getText(),
+                input3.getText());
+            if(action.equals("Tambah")) {
+                supplierControl.insertDataSupplier(d);
+            }
+            clearText();
+            showSupplier();
+            setComponent(false);
+            setEditDeleteBtn(false);
+        } catch(InputKosongException e) {
+            JOptionPane.showMessageDialog(this, e.message());
+        } catch(NoKodeException e) {
+            JOptionPane.showMessageDialog(this, e.message());
+        }
+    }//GEN-LAST:event_simpanButtonActionPerformed
 
     /**
      * @param args the command line arguments

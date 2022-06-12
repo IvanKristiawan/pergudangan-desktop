@@ -10,6 +10,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import model.Stok;
+import model.Supplier;
+import model.Gudang;
 /**
  *
  * @author ASUS
@@ -40,12 +42,12 @@ public class StokDAO {
         dbCon.closeConnection();
     }
     
-    public List<Stok> showStok() {
+    public List<Stok> showStok(String query) {
         con = dbCon.makeConnection();
         
-        String sql = "SELECT * FROM stok";
-        System.out.println("Mengambil data Stok...");
-        
+        String sql = "SELECT mk.*, d.* FROM stok as mk JOIN supplier as d ON d.kodeSupplier = mk.kodeSupplier WHERE (mk.kodeSupplier LIKE "
+                + "'%" + query + "%')";
+        System.out.println("Mengambil Stok...");
         List<Stok> list = new ArrayList();
         
         try {
@@ -54,14 +56,14 @@ public class StokDAO {
             
             if(rs != null) {
                 while(rs.next()) {
-                    Stok d = new Stok (
-                        rs.getString("kodeStok"),
-                        rs.getString("namaStok"),
-                        rs.getInt("kuantitas"),
-                        rs.getString("kodeSupplier"),
-                        rs.getString("kodeGudang")
+                    Supplier d = new Supplier (
+                        rs.getString("d.kodeSupplier"),
+                        rs.getString("d.namaSupplier"),
+                        rs.getString("d.alamatSupplier")
                     );
-                    list.add(d);
+                    Gudang g = new Gudang (null, null, null);
+                    Stok mk = new Stok(rs.getString("mk.kodeStok"), rs.getString("mk.namaStok"), rs.getInt("mk.kuantitas"), d, g);
+                    list.add(mk);
                 } 
             }
             rs.close();

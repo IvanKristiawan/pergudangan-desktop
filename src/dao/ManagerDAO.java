@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import model.Gudang;
 import model.Manager;
 /**
  *
@@ -39,12 +40,12 @@ public class ManagerDAO {
         dbCon.closeConnection();
     }
     
-    public List<Manager> showManager() {
+    public List<Manager> showManager(String query) {
         con = dbCon.makeConnection();
         
-        String sql = "SELECT * FROM manager";
-        System.out.println("Mengambil data Manager...");
-        
+        String sql = "SELECT mk.*, d.* FROM manager as mk JOIN gudang as d ON d.kodeGudang = mk.kodeGudang WHERE (mk.kodeManager LIKE "
+                + "'%" + query + "%')";
+        System.out.println("Mengambil Manager...");
         List<Manager> list = new ArrayList();
         
         try {
@@ -53,12 +54,13 @@ public class ManagerDAO {
             
             if(rs != null) {
                 while(rs.next()) {
-                    Manager d = new Manager (
-                        rs.getString("kodeManager"),
-                        rs.getString("namaManager"),
-                        rs.getString("kodeGudang")
+                    Gudang d = new Gudang (
+                        rs.getString("d.kodeGudang"),
+                        rs.getString("d.namaGudang"),
+                        rs.getString("d.alamatGudang")
                     );
-                    list.add(d);
+                    Manager mk = new Manager(rs.getString("mk.kodeManager"), rs.getString("mk.namaManager"), d);
+                    list.add(mk);
                 } 
             }
             rs.close();

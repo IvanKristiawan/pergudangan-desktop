@@ -6,6 +6,7 @@ package control;
 import dao.StokDAO;
 import java.util.List;
 import model.Stok;
+import table.TableStok;
 /**
  *
  * @author ASUS
@@ -17,15 +18,11 @@ public class StokControl {
         dDao.insertStok(d);
     }
     
-    public String showDataStok() {
-        List<Stok> dataStok = dDao.showStok();
+    public TableStok showStok(String query){
+        List<Stok> dataStok = dDao.showStok(query);
+        TableStok tableStok = new TableStok(dataStok);
         
-        String dosenString = "";
-        for (int i=0; i < dataStok.size(); i++){
-            dosenString = dosenString + dataStok.get(i).showDataStok() + "\n";
-        }
-        
-        return dosenString;
+        return tableStok;
     }
     
     public void deleteDataStok(String noInduk) {

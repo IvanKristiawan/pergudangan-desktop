@@ -59,7 +59,7 @@ public class ViewManager extends javax.swing.JFrame {
     }
     
     public void showManager() {
-        outputArea.setText(managerControl.showDataManager());
+        outputArea.setText(managerControl.showManager(""));
     }
     
     public void InputKosongException() throws InputKosongException {

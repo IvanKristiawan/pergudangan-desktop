@@ -12,10 +12,10 @@ public class Stok {
     private String kodeStok;
     private String namaStok;
     private int kuantitas;
-    private String kodeSupplier;
-    private String kodeGudang;
+    private Supplier kodeSupplier;
+    private Gudang kodeGudang;
 
-    public Stok(String kodeStok, String namaStok, int kuantitas, String kodeSupplier, String kodeGudang) {
+    public Stok(String kodeStok, String namaStok, int kuantitas, Supplier kodeSupplier, Gudang kodeGudang) {
         this.kodeStok = kodeStok;
         this.namaStok = namaStok;
         this.kuantitas = kuantitas;
@@ -47,19 +47,19 @@ public class Stok {
         this.kuantitas = kuantitas;
     }
 
-    public String getKodeSupplier() {
+    public Supplier getKodeSupplier() {
         return kodeSupplier;
     }
 
-    public void setKodeSupplier(String kodeSupplier) {
+    public void setKodeSupplier(Supplier kodeSupplier) {
         this.kodeSupplier = kodeSupplier;
     }
 
-    public String getKodeGudang() {
+    public Gudang getKodeGudang() {
         return kodeGudang;
     }
 
-    public void setKodeGudang(String kodeGudang) {
+    public void setKodeGudang(Gudang kodeGudang) {
         this.kodeGudang = kodeGudang;
     }
     

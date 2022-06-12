@@ -6,6 +6,7 @@ package control;
 import dao.ManagerDAO;
 import java.util.List;
 import model.Manager;
+import table.TableManager;
 /**
  *
  * @author ASUS
@@ -17,15 +18,11 @@ public class ManagerControl {
         dDao.insertManager(d);
     }
     
-    public String showDataManager() {
-        List<Manager> dataManager = dDao.showManager();
+    public TableManager showManager(String query){
+        List<Manager> dataManager = dDao.showManager(query);
+        TableManager tableManager = new TableManager(dataManager);
         
-        String dosenString = "";
-        for (int i=0; i < dataManager.size(); i++){
-            dosenString = dosenString + dataManager.get(i).showDataManager() + "\n";
-        }
-        
-        return dosenString;
+        return tableManager;
     }
     
     public void deleteDataManager(String noInduk) {
