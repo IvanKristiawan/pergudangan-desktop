@@ -9,7 +9,7 @@ package view;
  * @author acer1
  */
 public class ViewSupplier extends javax.swing.JFrame {
-
+ 
     /**
      * Creates new form ViewGudang
      */
