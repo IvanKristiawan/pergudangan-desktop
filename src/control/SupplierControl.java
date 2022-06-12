@@ -31,4 +31,9 @@ public class SupplierControl {
     public void deleteDataSupplier(String noInduk) {
         dDao.deleteSupplier(noInduk);
     }
+    
+    public List<Supplier> showListSupplier() {
+        List<Supplier> dataSupplier = dDao.showSupplier();
+        return dataSupplier;
+    }
 }

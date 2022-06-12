@@ -45,8 +45,11 @@ public class StokDAO {
     public List<Stok> showStok(String query) {
         con = dbCon.makeConnection();
         
-        String sql = "SELECT mk.*, d.* FROM stok as mk JOIN supplier as d ON d.kodeSupplier = mk.kodeSupplier WHERE (mk.kodeSupplier LIKE "
-                + "'%" + query + "%')";
+        String sql = "SELECT mk.*, d.*, g.* FROM stok as mk JOIN supplier as d ON d.kodeSupplier = mk.kodeSupplier"
+                + "JOIN gudang as g ON d.kodeGudang = g.kodeGudang "
+                + " WHERE (mk.kodeSupplier LIKE "
+                + "'%" + query + "%'"
+                + "OR mk.kodeGudang LIKE '%" + query + "%')";
         System.out.println("Mengambil Stok...");
         List<Stok> list = new ArrayList();
         
@@ -61,7 +64,11 @@ public class StokDAO {
                         rs.getString("d.namaSupplier"),
                         rs.getString("d.alamatSupplier")
                     );
-                    Gudang g = new Gudang (null, null, null);
+                    Gudang g = new Gudang (
+                        rs.getString("g.kodeGudang"),
+                        rs.getString("g.namaGudang"),
+                        rs.getString("g.alamatGudang")
+                    );
                     Stok mk = new Stok(rs.getString("mk.kodeStok"), rs.getString("mk.namaStok"), rs.getInt("mk.kuantitas"), d, g);
                     list.add(mk);
                 } 

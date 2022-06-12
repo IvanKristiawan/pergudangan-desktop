@@ -3,6 +3,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package view;
+import control.StokControl;
+import control.GudangControl;
+import control.SupplierControl;
+import java.util.List;
+import exception.InputKosongException;
+import exception.NoKodeException;
+import javax.swing.JOptionPane;
+import model.Stok;
 import model.Gudang;
 import model.Supplier;
 /**
@@ -10,12 +18,73 @@ import model.Supplier;
  * @author acer1
  */
 public class ViewStok extends javax.swing.JFrame {
-
+    private StokControl stokControl;
+    private GudangControl gudangControl;
+    private SupplierControl supplierControl;
+    List<Gudang> listGudang;
+    List<Supplier> listSupplier;
+    String action = null;
     /**
      * Creates new form ViewGudang
      */
     public ViewStok() {
         initComponents();
+        setComponent(false);
+        setEditDeleteBtn(false);
+        stokControl = new StokControl();
+        showStok();
+        setGudangToDropdown();
+        setSupplierToDropdown();
+    }
+    
+    public void setComponent(boolean value) {
+        input1.setEnabled(value);
+        input2.setEnabled(value);
+        dropdown.setEnabled(value);
+        dropdown1.setEnabled(value);
+        
+        tambahButton.setEnabled(value);
+        simpanButton.setEnabled(value);
+    }
+    
+    public void setEditDeleteBtn(boolean value) {
+        hapusButton.setEnabled(value);
+    }
+    
+    public void clearText() {
+        input1.setText("");
+        input2.setText("");
+        input3.setText("");
+    }
+    
+    public void setGudangToDropdown() {
+        listGudang = gudangControl.showListGudang();
+        for (int i = 1; i < listGudang.size(); i++){
+            dropdown1.addItem(listGudang.get(i));
+        } 
+    }
+    
+    public void setSupplierToDropdown() {
+        listSupplier = supplierControl.showListSupplier();
+        for (int i = 1; i < listSupplier.size(); i++){
+            dropdown.addItem(listSupplier.get(i));
+        } 
+    }
+    
+    public void showStok() {
+        jTable1.setModel(stokControl.showStok(""));
+    }
+    
+    public void InputKosongException() throws InputKosongException {
+        if(input1.getText().isEmpty() || input2.getText().isEmpty()) {
+                throw new InputKosongException();
+            }
+    }
+    
+    public void NoKodeException() throws NoKodeException {
+        if(input1.getText().length() != 5) {
+            throw new NoKodeException();
+        }
     }
 
     /**
@@ -198,10 +267,25 @@ public class ViewStok extends javax.swing.JFrame {
         inputLabel3.setText("Kuantitas");
 
         tambahButton.setText("Tambah");
+        tambahButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tambahButtonActionPerformed(evt);
+            }
+        });
 
         hapusButton.setText("Hapus");
+        hapusButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hapusButtonActionPerformed(evt);
+            }
+        });
 
         simpanButton.setText("Simpan");
+        simpanButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                simpanButtonActionPerformed(evt);
+            }
+        });
 
         inputLabel4.setText("Kode Supplier");
 
@@ -343,6 +427,84 @@ public class ViewStok extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void tambahButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tambahButtonActionPerformed
+        // TODO add your handling code here:
+        setComponent(true);
+        clearText();
+        action = "Tambah";
+    }//GEN-LAST:event_tambahButtonActionPerformed
+
+    private void hapusButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hapusButtonActionPerformed
+        // TODO add your handling code here:
+        int getAnswer = JOptionPane.showConfirmDialog(rootPane,
+            "Apakah yakin ingin menghapus data ?", "Konfirmasi",
+            JOptionPane.YES_NO_OPTION);
+        
+        if(getAnswer == JOptionPane.YES_OPTION) {
+            try {
+                stokControl.deleteDataStok(input1.getText());
+                clearText();
+                showStok();
+                JOptionPane.showMessageDialog(null, "Data berhasil dihapus!");
+            } catch(Exception e) {
+                System.out.println("Error : " + e.getMessage());
+            }
+        }
+    }//GEN-LAST:event_hapusButtonActionPerformed
+
+    private void simpanButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simpanButtonActionPerformed
+        // TODO add your handling code here:
+        try {
+            InputKosongException();
+            NoKodeException();
+            int selectedIndex = dropdown.getSelectedIndex();
+            Gudang selectedGudang = listGudang.get(selectedIndex);
+            int selectedIndex1 = dropdown1.getSelectedIndex();
+            Supplier selectedSupplier = listSupplier.get(selectedIndex);
+            
+            if(action.equals("Tambah")) {
+                Stok d = new Stok(input1.getText(), input2.getText(), Integer.parseInt(input3.getText()), selectedSupplier, selectedGudang);
+                stokControl.insertDataStok(d);
+            }
+            clearText();
+            showStok();
+            setComponent(false);
+            setEditDeleteBtn(false);
+        } catch(InputKosongException e) {
+            JOptionPane.showMessageDialog(this, e.message());
+        } catch(NoKodeException e) {
+            JOptionPane.showMessageDialog(this, e.message());
+        }
+    }//GEN-LAST:event_simpanButtonActionPerformed
+
+    private void TabGudangMouseClicked(java.awt.event.MouseEvent evt) {                                       
+        // TODO add your handling code here:
+        ViewGudang dv = new ViewGudang();
+        this.dispose();
+        dv.setVisible(true);
+    }                                      
+
+    private void TabManagerMouseClicked(java.awt.event.MouseEvent evt) {                                        
+        // TODO add your handling code here:
+        ViewManager dv = new ViewManager();
+        this.dispose();
+        dv.setVisible(true);
+    }                                       
+
+    private void TabSupplierMouseClicked(java.awt.event.MouseEvent evt) {                                         
+        // TODO add your handling code here:
+        ViewSupplier dv = new ViewSupplier();
+        this.dispose();
+        dv.setVisible(true);
+    }                                        
+
+    private void TabStokMouseClicked(java.awt.event.MouseEvent evt) {                                     
+        // TODO add your handling code here:
+        ViewStok dv = new ViewStok();
+        this.dispose();
+        dv.setVisible(true);
+    }     
+    
     /**
      * @param args the command line arguments
      */

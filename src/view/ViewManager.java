@@ -59,7 +59,7 @@ public class ViewManager extends javax.swing.JFrame {
     }
     
     public void showManager() {
-        outputArea.setText(managerControl.showManager(""));
+        jTable1.setModel(managerControl.showManager(""));
     }
     
     public void InputKosongException() throws InputKosongException {
@@ -441,6 +441,34 @@ public class ViewManager extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_simpanButtonActionPerformed
 
+    private void TabGudangMouseClicked(java.awt.event.MouseEvent evt) {                                       
+        // TODO add your handling code here:
+        ViewGudang dv = new ViewGudang();
+        this.dispose();
+        dv.setVisible(true);
+    }                                      
+
+    private void TabManagerMouseClicked(java.awt.event.MouseEvent evt) {                                        
+        // TODO add your handling code here:
+        ViewManager dv = new ViewManager();
+        this.dispose();
+        dv.setVisible(true);
+    }                                       
+
+    private void TabSupplierMouseClicked(java.awt.event.MouseEvent evt) {                                         
+        // TODO add your handling code here:
+        ViewSupplier dv = new ViewSupplier();
+        this.dispose();
+        dv.setVisible(true);
+    }                                        
+
+    private void TabStokMouseClicked(java.awt.event.MouseEvent evt) {                                     
+        // TODO add your handling code here:
+        ViewStok dv = new ViewStok();
+        this.dispose();
+        dv.setVisible(true);
+    }     
+    
     /**
      * @param args the command line arguments
      */
