@@ -28,4 +28,4 @@ public class StokControl {
     public void deleteDataStok(String noInduk) {
         dDao.deleteStok(noInduk);
     }
-}
+} 
