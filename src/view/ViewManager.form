@@ -294,7 +294,7 @@
                               <Component id="inputLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="input2" alignment="0" pref="260" max="32767" attributes="0"/>
                               <Component id="input1" alignment="0" max="32767" attributes="0"/>
-                              <Component id="input3" alignment="0" max="32767" attributes="0"/>
+                              <Component id="dropdown" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
@@ -333,8 +333,8 @@
                   <Component id="inputLabel3" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="input3" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="simpanButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="dropdown" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
                   <Component id="jScrollPane1" min="-2" pref="540" max="-2" attributes="0"/>
@@ -346,24 +346,22 @@
       <SubComponents>
         <Component class="javax.swing.JLabel" name="inputLabel1">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Kode Gudang"/>
+            <Property name="text" type="java.lang.String" value="Kode Manager"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="input1">
         </Component>
         <Component class="javax.swing.JLabel" name="inputLabel2">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Nama Gudang"/>
+            <Property name="text" type="java.lang.String" value="Nama Manager"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="input2">
         </Component>
         <Component class="javax.swing.JLabel" name="inputLabel3">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Alamat Gudang"/>
+            <Property name="text" type="java.lang.String" value="Kode Gudang"/>
           </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="input3">
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane1">
           <AuxValues>
@@ -394,6 +392,19 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Tambah"/>
           </Properties>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="dropdown">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="0"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="dropdownActionPerformed"/>
+          </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Gudang&gt;"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>

@@ -3,7 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package view;
-
+import model.Gudang;
+import model.Supplier;
 /**
  *
  * @author acer1
@@ -37,6 +38,21 @@ public class ViewStok extends javax.swing.JFrame {
         Stok = new javax.swing.JLabel();
         Title = new javax.swing.JLabel();
         Container = new javax.swing.JPanel();
+        inputLabel1 = new javax.swing.JLabel();
+        input1 = new javax.swing.JTextField();
+        inputLabel2 = new javax.swing.JLabel();
+        input2 = new javax.swing.JTextField();
+        inputLabel3 = new javax.swing.JLabel();
+        input3 = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        outputArea = new javax.swing.JTextArea();
+        tambahButton = new javax.swing.JButton();
+        hapusButton = new javax.swing.JButton();
+        simpanButton = new javax.swing.JButton();
+        inputLabel4 = new javax.swing.JLabel();
+        inputLabel5 = new javax.swing.JLabel();
+        dropdown = new javax.swing.JComboBox<>();
+        dropdown1 = new javax.swing.JComboBox<>();
         BottomBar = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
 
@@ -175,15 +191,96 @@ public class ViewStok extends javax.swing.JFrame {
 
         Container.setBackground(new java.awt.Color(255, 255, 255));
 
+        inputLabel1.setText("Kode Stok");
+
+        inputLabel2.setText("Nama Stok");
+
+        inputLabel3.setText("Kuantitas");
+
+        outputArea.setColumns(20);
+        outputArea.setRows(5);
+        jScrollPane1.setViewportView(outputArea);
+
+        tambahButton.setText("Tambah");
+
+        hapusButton.setText("Hapus");
+
+        simpanButton.setText("Simpan");
+
+        inputLabel4.setText("Kode Supplier");
+
+        inputLabel5.setText("Kode Gudang");
+
         javax.swing.GroupLayout ContainerLayout = new javax.swing.GroupLayout(Container);
         Container.setLayout(ContainerLayout);
         ContainerLayout.setHorizontalGroup(
             ContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ContainerLayout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addGroup(ContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(ContainerLayout.createSequentialGroup()
+                        .addComponent(jScrollPane1)
+                        .addGap(29, 29, 29))
+                    .addGroup(ContainerLayout.createSequentialGroup()
+                        .addGroup(ContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(inputLabel3)
+                            .addComponent(inputLabel2)
+                            .addComponent(inputLabel1)
+                            .addComponent(input2, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
+                            .addComponent(input1)
+                            .addComponent(input3))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(ContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(ContainerLayout.createSequentialGroup()
+                                .addGroup(ContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(inputLabel5)
+                                    .addComponent(inputLabel4)
+                                    .addComponent(dropdown, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(150, 150, 150)
+                                .addGroup(ContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ContainerLayout.createSequentialGroup()
+                                        .addComponent(tambahButton)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(hapusButton)
+                                        .addGap(44, 44, 44))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ContainerLayout.createSequentialGroup()
+                                        .addComponent(simpanButton)
+                                        .addGap(52, 52, 52))))
+                            .addComponent(dropdown1, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)))))
         );
         ContainerLayout.setVerticalGroup(
             ContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 764, Short.MAX_VALUE)
+            .addGroup(ContainerLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(ContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(ContainerLayout.createSequentialGroup()
+                        .addComponent(inputLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(ContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(input1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tambahButton)
+                            .addComponent(hapusButton)
+                            .addComponent(dropdown, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(inputLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(ContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(input2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(dropdown1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(inputLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(ContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(input3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(simpanButton)))
+                    .addGroup(ContainerLayout.createSequentialGroup()
+                        .addComponent(inputLabel4)
+                        .addGap(36, 36, 36)
+                        .addComponent(inputLabel5)
+                        .addGap(81, 81, 81)))
+                .addGap(36, 36, 36)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         BottomBar.setBackground(new java.awt.Color(108, 201, 253));
@@ -279,8 +376,23 @@ public class ViewStok extends javax.swing.JFrame {
     private javax.swing.JPanel TabSupplier;
     private javax.swing.JLabel Title;
     private javax.swing.JPanel TopBar;
+    private javax.swing.JComboBox<Supplier> dropdown;
+    private javax.swing.JComboBox<Gudang> dropdown1;
     private javax.swing.JLabel gudang;
+    private javax.swing.JButton hapusButton;
+    private javax.swing.JTextField input1;
+    private javax.swing.JTextField input2;
+    private javax.swing.JTextField input3;
+    private javax.swing.JLabel inputLabel1;
+    private javax.swing.JLabel inputLabel2;
+    private javax.swing.JLabel inputLabel3;
+    private javax.swing.JLabel inputLabel4;
+    private javax.swing.JLabel inputLabel5;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea outputArea;
+    private javax.swing.JButton simpanButton;
     private javax.swing.JLabel supplier;
+    private javax.swing.JButton tambahButton;
     // End of variables declaration//GEN-END:variables
 }

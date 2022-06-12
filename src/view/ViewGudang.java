@@ -37,6 +37,17 @@ public class ViewGudang extends javax.swing.JFrame {
         Stok = new javax.swing.JLabel();
         Title = new javax.swing.JLabel();
         Container = new javax.swing.JPanel();
+        inputLabel1 = new javax.swing.JLabel();
+        input1 = new javax.swing.JTextField();
+        inputLabel2 = new javax.swing.JLabel();
+        input2 = new javax.swing.JTextField();
+        inputLabel3 = new javax.swing.JLabel();
+        input3 = new javax.swing.JTextField();
+        tambahButton = new javax.swing.JButton();
+        hapusButton = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        outputArea = new javax.swing.JTextArea();
+        simpanButton = new javax.swing.JButton();
         BottomBar = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
 
@@ -154,7 +165,7 @@ public class ViewGudang extends javax.swing.JFrame {
                 .addComponent(TabSupplier, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(TabStok, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(362, Short.MAX_VALUE))
+                .addContainerGap(344, Short.MAX_VALUE))
         );
         TopBarLayout.setVerticalGroup(
             TopBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -176,15 +187,74 @@ public class ViewGudang extends javax.swing.JFrame {
 
         Container.setBackground(new java.awt.Color(255, 255, 255));
 
+        inputLabel1.setText("Kode Gudang");
+
+        inputLabel2.setText("Nama Gudang");
+
+        inputLabel3.setText("Alamat Gudang");
+
+        tambahButton.setText("Tambah");
+
+        hapusButton.setText("Hapus");
+
+        outputArea.setColumns(20);
+        outputArea.setRows(5);
+        jScrollPane1.setViewportView(outputArea);
+
+        simpanButton.setText("Simpan");
+
         javax.swing.GroupLayout ContainerLayout = new javax.swing.GroupLayout(Container);
         Container.setLayout(ContainerLayout);
         ContainerLayout.setHorizontalGroup(
             ContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ContainerLayout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addGroup(ContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(ContainerLayout.createSequentialGroup()
+                        .addComponent(jScrollPane1)
+                        .addGap(29, 29, 29))
+                    .addGroup(ContainerLayout.createSequentialGroup()
+                        .addGroup(ContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(inputLabel3)
+                            .addComponent(inputLabel2)
+                            .addComponent(inputLabel1)
+                            .addComponent(input2, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
+                            .addComponent(input1)
+                            .addComponent(input3))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(ContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ContainerLayout.createSequentialGroup()
+                                .addComponent(tambahButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(hapusButton)
+                                .addGap(44, 44, 44))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ContainerLayout.createSequentialGroup()
+                                .addComponent(simpanButton)
+                                .addGap(52, 52, 52))))))
         );
         ContainerLayout.setVerticalGroup(
             ContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 764, Short.MAX_VALUE)
+            .addGroup(ContainerLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(inputLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(ContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(input1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tambahButton)
+                    .addComponent(hapusButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(inputLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(input2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(inputLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(ContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(input3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(simpanButton))
+                .addGap(36, 36, 36)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(48, Short.MAX_VALUE))
         );
 
         BottomBar.setBackground(new java.awt.Color(108, 201, 253));
@@ -279,7 +349,18 @@ public class ViewGudang extends javax.swing.JFrame {
     private javax.swing.JLabel Title;
     private javax.swing.JPanel TopBar;
     private javax.swing.JLabel gudang;
+    private javax.swing.JButton hapusButton;
+    private javax.swing.JTextField input1;
+    private javax.swing.JTextField input2;
+    private javax.swing.JTextField input3;
+    private javax.swing.JLabel inputLabel1;
+    private javax.swing.JLabel inputLabel2;
+    private javax.swing.JLabel inputLabel3;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea outputArea;
+    private javax.swing.JButton simpanButton;
     private javax.swing.JLabel supplier;
+    private javax.swing.JButton tambahButton;
     // End of variables declaration//GEN-END:variables
 }

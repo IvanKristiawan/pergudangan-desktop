@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package view;
-
+import model.Gudang;
 /**
  *
  * @author acer1
@@ -42,12 +42,12 @@ public class ViewManager extends javax.swing.JFrame {
         inputLabel2 = new javax.swing.JLabel();
         input2 = new javax.swing.JTextField();
         inputLabel3 = new javax.swing.JLabel();
-        input3 = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         outputArea = new javax.swing.JTextArea();
         simpanButton = new javax.swing.JButton();
         hapusButton = new javax.swing.JButton();
         tambahButton = new javax.swing.JButton();
+        dropdown = new javax.swing.JComboBox<>();
         BottomBar = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
 
@@ -186,11 +186,11 @@ public class ViewManager extends javax.swing.JFrame {
 
         Container.setBackground(new java.awt.Color(255, 255, 255));
 
-        inputLabel1.setText("Kode Gudang");
+        inputLabel1.setText("Kode Manager");
 
-        inputLabel2.setText("Nama Gudang");
+        inputLabel2.setText("Nama Manager");
 
-        inputLabel3.setText("Alamat Gudang");
+        inputLabel3.setText("Kode Gudang");
 
         outputArea.setColumns(20);
         outputArea.setRows(5);
@@ -201,6 +201,12 @@ public class ViewManager extends javax.swing.JFrame {
         hapusButton.setText("Hapus");
 
         tambahButton.setText("Tambah");
+
+        dropdown.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dropdownActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout ContainerLayout = new javax.swing.GroupLayout(Container);
         Container.setLayout(ContainerLayout);
@@ -219,7 +225,7 @@ public class ViewManager extends javax.swing.JFrame {
                             .addComponent(inputLabel1)
                             .addComponent(input2, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
                             .addComponent(input1)
-                            .addComponent(input3))
+                            .addComponent(dropdown, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(ContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ContainerLayout.createSequentialGroup()
@@ -249,8 +255,8 @@ public class ViewManager extends javax.swing.JFrame {
                 .addComponent(inputLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(ContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(input3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(simpanButton))
+                    .addComponent(simpanButton)
+                    .addComponent(dropdown, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(36, 36, 36)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(20, Short.MAX_VALUE))
@@ -299,6 +305,10 @@ public class ViewManager extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void dropdownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dropdownActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_dropdownActionPerformed
 
     /**
      * @param args the command line arguments
@@ -349,11 +359,11 @@ public class ViewManager extends javax.swing.JFrame {
     private javax.swing.JPanel TabSupplier;
     private javax.swing.JLabel Title;
     private javax.swing.JPanel TopBar;
+    private javax.swing.JComboBox<Gudang> dropdown;
     private javax.swing.JLabel gudang;
     private javax.swing.JButton hapusButton;
     private javax.swing.JTextField input1;
     private javax.swing.JTextField input2;
-    private javax.swing.JTextField input3;
     private javax.swing.JLabel inputLabel1;
     private javax.swing.JLabel inputLabel2;
     private javax.swing.JLabel inputLabel3;
