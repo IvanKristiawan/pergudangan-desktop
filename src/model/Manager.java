@@ -11,9 +11,9 @@ package model;
 public class Manager {
     private String kodeManager;
     private String namaManager;
-    private String kodeGudang;
+    private Gudang kodeGudang;
 
-    public Manager(String kodeManager, String namaManager, String kodeGudang) {
+    public Manager(String kodeManager, String namaManager, Gudang kodeGudang) {
         this.kodeManager = kodeManager;
         this.namaManager = namaManager;
         this.kodeGudang = kodeGudang;
@@ -35,11 +35,11 @@ public class Manager {
         this.namaManager = namaManager;
     }
 
-    public String getKodeGudang() {
+    public Gudang getKodeGudang() {
         return kodeGudang;
     }
 
-    public void setKodeGudang(String kodeGudang) {
+    public void setKodeGudang(Gudang kodeGudang) {
         this.kodeGudang = kodeGudang;
     }
 

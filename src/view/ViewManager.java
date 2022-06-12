@@ -5,6 +5,7 @@
 package view;
 import control.GudangControl;
 import control.ManagerControl;
+import java.util.List;
 import exception.InputKosongException;
 import exception.NoKodeException;
 import javax.swing.JOptionPane;
@@ -17,6 +18,8 @@ import model.Manager;
 public class ViewManager extends javax.swing.JFrame {
     private GudangControl gudangControl;
     private ManagerControl managerControl;
+    List<Gudang> listGudang;
+    List<Manager> listManager;
     String action = null;
     /**
      * Creates new form ViewGudang
@@ -53,6 +56,22 @@ public class ViewManager extends javax.swing.JFrame {
         for (int i = 1; i < listGudang.size(); i++){
             dropdown.addItem(listGudang.get(i));
         } 
+    }
+    
+    public void showManager() {
+        outputArea.setText(managerControl.showDataManager());
+    }
+    
+    public void InputKosongException() throws InputKosongException {
+        if(input1.getText().isEmpty() || input2.getText().isEmpty()) {
+                throw new InputKosongException();
+            }
+    }
+    
+    public void NoKodeException() throws NoKodeException {
+        if(input1.getText().length() != 5) {
+            throw new NoKodeException();
+        }
     }
 
     /**
@@ -235,10 +254,25 @@ public class ViewManager extends javax.swing.JFrame {
         jScrollPane1.setViewportView(outputArea);
 
         simpanButton.setText("Simpan");
+        simpanButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                simpanButtonActionPerformed(evt);
+            }
+        });
 
         hapusButton.setText("Hapus");
+        hapusButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hapusButtonActionPerformed(evt);
+            }
+        });
 
         tambahButton.setText("Tambah");
+        tambahButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tambahButtonActionPerformed(evt);
+            }
+        });
 
         dropdown.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -347,6 +381,54 @@ public class ViewManager extends javax.swing.JFrame {
     private void dropdownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dropdownActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_dropdownActionPerformed
+
+    private void tambahButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tambahButtonActionPerformed
+        // TODO add your handling code here:
+        setComponent(true);
+        clearText();
+        action = "Tambah";
+    }//GEN-LAST:event_tambahButtonActionPerformed
+
+    private void hapusButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hapusButtonActionPerformed
+        // TODO add your handling code here:
+        int getAnswer = JOptionPane.showConfirmDialog(rootPane,
+            "Apakah yakin ingin menghapus data ?", "Konfirmasi",
+            JOptionPane.YES_NO_OPTION);
+        
+        if(getAnswer == JOptionPane.YES_OPTION) {
+            try {
+                managerControl.deleteDataManager(input1.getText());
+                clearText();
+                showManager();
+                JOptionPane.showMessageDialog(null, "Data berhasil dihapus!");
+            } catch(Exception e) {
+                System.out.println("Error : " + e.getMessage());
+            }
+        }
+    }//GEN-LAST:event_hapusButtonActionPerformed
+
+    private void simpanButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simpanButtonActionPerformed
+        // TODO add your handling code here:
+        try {
+            InputKosongException();
+            NoKodeException();
+            int selectedIndex = dropdown.getSelectedIndex();
+            Gudang selectedGudang = listGudang.get(selectedIndex);
+            
+            if(action.equals("Tambah")) {
+                Manager d = new Manager(input1.getText(), input2.getText(), selectedGudang);
+                managerControl.insertDataManager(d);
+            }
+            clearText();
+            showManager();
+            setComponent(false);
+            setEditDeleteBtn(false);
+        } catch(InputKosongException e) {
+            JOptionPane.showMessageDialog(this, e.message());
+        } catch(NoKodeException e) {
+            JOptionPane.showMessageDialog(this, e.message());
+        }
+    }//GEN-LAST:event_simpanButtonActionPerformed
 
     /**
      * @param args the command line arguments
