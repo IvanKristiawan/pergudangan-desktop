@@ -29,8 +29,10 @@ public class ViewStok extends javax.swing.JFrame {
      */
     public ViewStok() {
         initComponents();
-        setComponent(false);
+        setComponent(true);
         setEditDeleteBtn(false);
+        gudangControl = new GudangControl();
+        supplierControl = new SupplierControl();
         stokControl = new StokControl();
         showStok();
         setGudangToDropdown();
@@ -43,7 +45,7 @@ public class ViewStok extends javax.swing.JFrame {
         dropdown.setEnabled(value);
         dropdown1.setEnabled(value);
         
-        tambahButton.setEnabled(value);
+        tambahButton.setEnabled(true);
         simpanButton.setEnabled(value);
     }
     
@@ -131,6 +133,11 @@ public class ViewStok extends javax.swing.JFrame {
         TopBar.setBackground(new java.awt.Color(108, 201, 253));
 
         TabGudang.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        TabGudang.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TabGudangMouseClicked(evt);
+            }
+        });
 
         gudang.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         gudang.setText("Gudang");
@@ -153,6 +160,11 @@ public class ViewStok extends javax.swing.JFrame {
         );
 
         TabManager.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        TabManager.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TabManagerMouseClicked(evt);
+            }
+        });
 
         Manager.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         Manager.setText("Manager");
@@ -175,6 +187,11 @@ public class ViewStok extends javax.swing.JFrame {
         );
 
         TabSupplier.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        TabSupplier.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TabSupplierMouseClicked(evt);
+            }
+        });
 
         supplier.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         supplier.setText("Supplier");
@@ -197,6 +214,11 @@ public class ViewStok extends javax.swing.JFrame {
         );
 
         TabStok.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        TabStok.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TabStokMouseClicked(evt);
+            }
+        });
 
         Stok.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         Stok.setText("Stok");
@@ -312,23 +334,6 @@ public class ViewStok extends javax.swing.JFrame {
                 .addGap(27, 27, 27)
                 .addGroup(ContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(ContainerLayout.createSequentialGroup()
-                        .addGroup(ContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(inputLabel3)
-                            .addComponent(inputLabel2)
-                            .addComponent(input2, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
-                            .addComponent(input3))
-                        .addGap(18, 18, 18)
-                        .addGroup(ContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(inputLabel4)
-                            .addComponent(dropdown1, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(ContainerLayout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 847, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ContainerLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(ContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ContainerLayout.createSequentialGroup()
                         .addGroup(ContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(ContainerLayout.createSequentialGroup()
                                 .addComponent(tambahButton)
@@ -341,20 +346,35 @@ public class ViewStok extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addGroup(ContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(inputLabel5)
-                                    .addComponent(dropdown, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(334, 334, 334))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ContainerLayout.createSequentialGroup()
-                        .addComponent(simpanButton)
-                        .addGap(170, 170, 170))))
+                                    .addComponent(dropdown, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 847, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(ContainerLayout.createSequentialGroup()
+                        .addGroup(ContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(inputLabel3)
+                            .addComponent(inputLabel2)
+                            .addComponent(input2, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
+                            .addComponent(input3))
+                        .addGroup(ContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(ContainerLayout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addGroup(ContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(inputLabel4)
+                                    .addComponent(dropdown1, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ContainerLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(simpanButton)
+                                .addGap(91, 91, 91))))))
         );
         ContainerLayout.setVerticalGroup(
             ContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ContainerLayout.createSequentialGroup()
-                .addGap(19, 19, 19)
+                .addContainerGap(27, Short.MAX_VALUE)
                 .addGroup(ContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tambahButton)
                     .addComponent(hapusButton))
-                .addGap(29, 29, 29)
+                .addGap(18, 18, 18)
                 .addGroup(ContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(ContainerLayout.createSequentialGroup()
                         .addComponent(inputLabel5)
@@ -364,7 +384,7 @@ public class ViewStok extends javax.swing.JFrame {
                         .addComponent(inputLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(input1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(ContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(inputLabel2)
                     .addComponent(inputLabel4))
@@ -375,10 +395,10 @@ public class ViewStok extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(inputLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(input3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
-                .addComponent(simpanButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(ContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(input3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(simpanButton))
+                .addGap(56, 56, 56)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 468, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -462,10 +482,8 @@ public class ViewStok extends javax.swing.JFrame {
             int selectedIndex1 = dropdown1.getSelectedIndex();
             Supplier selectedSupplier = listSupplier.get(selectedIndex);
             
-            if(action.equals("Tambah")) {
-                Stok d = new Stok(input1.getText(), input2.getText(), Integer.parseInt(input3.getText()), selectedSupplier, selectedGudang);
-                stokControl.insertDataStok(d);
-            }
+            Stok d = new Stok(input1.getText(), input2.getText(), Integer.parseInt(input3.getText()), selectedSupplier, selectedGudang);
+            stokControl.insertDataStok(d);
             clearText();
             showStok();
             setComponent(false);
@@ -477,34 +495,34 @@ public class ViewStok extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_simpanButtonActionPerformed
 
-    private void TabGudangMouseClicked(java.awt.event.MouseEvent evt) {                                       
+    private void TabGudangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabGudangMouseClicked
         // TODO add your handling code here:
         ViewGudang dv = new ViewGudang();
         this.dispose();
         dv.setVisible(true);
-    }                                      
+    }//GEN-LAST:event_TabGudangMouseClicked
 
-    private void TabManagerMouseClicked(java.awt.event.MouseEvent evt) {                                        
+    private void TabManagerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabManagerMouseClicked
         // TODO add your handling code here:
         ViewManager dv = new ViewManager();
         this.dispose();
         dv.setVisible(true);
-    }                                       
+    }//GEN-LAST:event_TabManagerMouseClicked
 
-    private void TabSupplierMouseClicked(java.awt.event.MouseEvent evt) {                                         
+    private void TabSupplierMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabSupplierMouseClicked
         // TODO add your handling code here:
         ViewSupplier dv = new ViewSupplier();
         this.dispose();
         dv.setVisible(true);
-    }                                        
+    }//GEN-LAST:event_TabSupplierMouseClicked
 
-    private void TabStokMouseClicked(java.awt.event.MouseEvent evt) {                                     
+    private void TabStokMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabStokMouseClicked
         // TODO add your handling code here:
         ViewStok dv = new ViewStok();
         this.dispose();
         dv.setVisible(true);
-    }     
-    
+    }//GEN-LAST:event_TabStokMouseClicked
+
     /**
      * @param args the command line arguments
      */

@@ -44,6 +44,6 @@ public class Supplier {
     }
     
     public String showDataSupplier() {
-        return this.kodeSupplier + " | " + this.namaSupplier + " | " + this.alamatSupplier + " | " + this.kodeSupplier;
+        return this.kodeSupplier + " | " + this.namaSupplier + " | " + this.alamatSupplier;
     }
 }

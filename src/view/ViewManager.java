@@ -11,6 +11,7 @@ import exception.NoKodeException;
 import javax.swing.JOptionPane;
 import model.Gudang;
 import model.Manager;
+import table.TableManager;
 /**
  *
  * @author acer1
@@ -26,8 +27,9 @@ public class ViewManager extends javax.swing.JFrame {
      */
     public ViewManager() {
         initComponents();
-        setComponent(false);
+        setComponent(true);
         setEditDeleteBtn(false);
+        gudangControl = new GudangControl();
         managerControl = new ManagerControl();
         showManager();
         setGudangToDropdown();
@@ -38,8 +40,23 @@ public class ViewManager extends javax.swing.JFrame {
         input2.setEnabled(value);
         dropdown.setEnabled(value);
         
-        tambahButton.setEnabled(value);
+        tambahButton.setEnabled(true);
         simpanButton.setEnabled(value);
+        
+        try {
+            TableManager manager = managerControl.showManager("");
+            if(manager.getRowCount() == 0) {
+                clearText();
+                setEditDeleteBtn(false);
+                JOptionPane.showConfirmDialog(null, "Data tidak ditemukan",
+                    "Konfirmasi", JOptionPane.DEFAULT_OPTION);
+            } else {
+                jTable1.setModel(manager);
+            }
+            clearText();
+        } catch(Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        } 
     }
     
     public void setEditDeleteBtn(boolean value) {
@@ -114,6 +131,11 @@ public class ViewManager extends javax.swing.JFrame {
         TopBar.setBackground(new java.awt.Color(108, 201, 253));
 
         TabGudang.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        TabGudang.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TabGudangMouseClicked(evt);
+            }
+        });
 
         gudang.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         gudang.setText("Gudang");
@@ -136,6 +158,11 @@ public class ViewManager extends javax.swing.JFrame {
         );
 
         TabManager.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        TabManager.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TabManagerMouseClicked(evt);
+            }
+        });
 
         Manager.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         Manager.setText("Manager");
@@ -158,6 +185,11 @@ public class ViewManager extends javax.swing.JFrame {
         );
 
         TabSupplier.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        TabSupplier.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TabSupplierMouseClicked(evt);
+            }
+        });
 
         supplier.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         supplier.setText("Supplier");
@@ -180,6 +212,11 @@ public class ViewManager extends javax.swing.JFrame {
         );
 
         TabStok.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        TabStok.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TabStokMouseClicked(evt);
+            }
+        });
 
         Stok.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         Stok.setText("Stok");
@@ -426,10 +463,8 @@ public class ViewManager extends javax.swing.JFrame {
             int selectedIndex = dropdown.getSelectedIndex();
             Gudang selectedGudang = listGudang.get(selectedIndex);
             
-            if(action.equals("Tambah")) {
-                Manager d = new Manager(input1.getText(), input2.getText(), selectedGudang);
-                managerControl.insertDataManager(d);
-            }
+            Manager d = new Manager(input1.getText(), input2.getText(), selectedGudang);
+            managerControl.insertDataManager(d);
             clearText();
             showManager();
             setComponent(false);
@@ -441,34 +476,34 @@ public class ViewManager extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_simpanButtonActionPerformed
 
-    private void TabGudangMouseClicked(java.awt.event.MouseEvent evt) {                                       
+    private void TabGudangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabGudangMouseClicked
         // TODO add your handling code here:
         ViewGudang dv = new ViewGudang();
         this.dispose();
         dv.setVisible(true);
-    }                                      
+    }//GEN-LAST:event_TabGudangMouseClicked
 
-    private void TabManagerMouseClicked(java.awt.event.MouseEvent evt) {                                        
+    private void TabManagerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabManagerMouseClicked
         // TODO add your handling code here:
         ViewManager dv = new ViewManager();
         this.dispose();
         dv.setVisible(true);
-    }                                       
+    }//GEN-LAST:event_TabManagerMouseClicked
 
-    private void TabSupplierMouseClicked(java.awt.event.MouseEvent evt) {                                         
+    private void TabSupplierMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabSupplierMouseClicked
         // TODO add your handling code here:
         ViewSupplier dv = new ViewSupplier();
         this.dispose();
         dv.setVisible(true);
-    }                                        
+    }//GEN-LAST:event_TabSupplierMouseClicked
 
-    private void TabStokMouseClicked(java.awt.event.MouseEvent evt) {                                     
+    private void TabStokMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabStokMouseClicked
         // TODO add your handling code here:
         ViewStok dv = new ViewStok();
         this.dispose();
         dv.setVisible(true);
-    }     
-    
+    }//GEN-LAST:event_TabStokMouseClicked
+
     /**
      * @param args the command line arguments
      */

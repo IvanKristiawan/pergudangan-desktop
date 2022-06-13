@@ -20,7 +20,7 @@ public class ViewSupplier extends javax.swing.JFrame {
      */
     public ViewSupplier() {
         initComponents();
-        setComponent(false);
+        setComponent(true);
         setEditDeleteBtn(false);
         supplierControl = new SupplierControl();
         showSupplier();
@@ -31,7 +31,7 @@ public class ViewSupplier extends javax.swing.JFrame {
         input2.setEnabled(value);
         input3.setEnabled(value);
         
-        tambahButton.setEnabled(value);
+        tambahButton.setEnabled(true);
         simpanButton.setEnabled(value);
     }
     
@@ -414,9 +414,7 @@ public class ViewSupplier extends javax.swing.JFrame {
             
             Supplier d = new Supplier(input1.getText(), input2.getText(),
                 input3.getText());
-            if(action.equals("Tambah")) {
-                supplierControl.insertDataSupplier(d);
-            }
+            supplierControl.insertDataSupplier(d);
             clearText();
             showSupplier();
             setComponent(false);
