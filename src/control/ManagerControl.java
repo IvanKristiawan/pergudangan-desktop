@@ -24,6 +24,13 @@ public class ManagerControl {
         
         return tableManager;
     }
+
+    public Manager searchManager(String noInduk) {
+        Manager d = null;
+        d = dDao.searchManager(noInduk);
+        
+        return d;
+    }
     
     public void deleteDataManager(String noInduk) {
         dDao.deleteManager(noInduk);

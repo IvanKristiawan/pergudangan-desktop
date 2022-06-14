@@ -83,6 +83,49 @@ public class StokDAO {
         
         return list;
     }
+
+    public Stok searchStok(String noInduk) {
+        con = dbCon.makeConnection();
+        
+        String sql = "SELECT * FROM stok WHERE nomor_induk_stok = '" + noInduk + "'";
+        System.out.println("Searching Stok...");
+        Stok d = null;
+        
+        try {
+            Statement statement = con.createStatement();
+            ResultSet rs = statement.executeQuery(sql);
+            
+            if(rs != null) {
+                while(rs.next()) {
+                    Supplier s = new Supplier (
+                        rs.getString("kodeSupplier"),
+                        rs.getString("namaSupplier"),
+                        rs.getString("alamatSupplier")
+                    );
+                    Gudang g = new Gudang (
+                        rs.getString("kodeGudang"),
+                        rs.getString("namaGudang"),
+                        rs.getString("alamatGudang")
+                    );
+                    d = new Stok(
+                        rs.getString("kodeStok"), 
+                        rs.getString("namaStok"), 
+                        rs.getInt("kuantitas"), 
+                        s, 
+                        g
+                    );
+                }
+            }
+            rs.close();
+            statement.close();
+        } catch(Exception e) {
+            System.out.println("Error reading database...");
+            System.out.println(e);
+        } 
+        dbCon.closeConnection();
+        
+        return d;
+    }
     
     public void deleteStok(String noInduk) {
         con = dbCon.makeConnection();

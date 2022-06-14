@@ -71,6 +71,37 @@ public class GudangDAO {
         
         return list;
     }
+
+    public Gudang searchGudang(String noInduk) {
+        con = dbCon.makeConnection();
+        
+        String sql = "SELECT * FROM gudang WHERE kodeGudang = '" + noInduk + "'";
+        System.out.println("Searching Gudang...");
+        Gudang d = null;
+        
+        try {
+            Statement statement = con.createStatement();
+            ResultSet rs = statement.executeQuery(sql);
+            
+            if(rs != null) {
+                while(rs.next()) {
+                    d = new Gudang(
+                            rs.getString("kodeGudang"),
+                            rs.getString("namaGudang"),
+                            rs.getString("alamatGudang")
+                        );
+                }
+            }
+            rs.close();
+            statement.close();
+        } catch(Exception e) {
+            System.out.println("Error reading database...");
+            System.out.println(e);
+        } 
+        dbCon.closeConnection();
+        
+        return d;
+    }
     
     public void deleteGudang(String noInduk) {
         con = dbCon.makeConnection();

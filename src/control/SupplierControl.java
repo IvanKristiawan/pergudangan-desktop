@@ -20,16 +20,23 @@ public class SupplierControl {
     public String showDataSupplier() {
         List<Supplier> dataSupplier = dDao.showSupplier();
         
-        String dosenString = "";
+        String supplierString = "";
         for (int i=0; i < dataSupplier.size(); i++){
-            dosenString = dosenString + dataSupplier.get(i).showDataSupplier() + "\n";
+            supplierString = supplierString + dataSupplier.get(i).showDataSupplier() + "\n";
         }
         
-        return dosenString;
+        return supplierString;
     }
     
     public void deleteDataSupplier(String noInduk) {
         dDao.deleteSupplier(noInduk);
+    }
+    
+    public Supplier searchSupplier(String noInduk) {
+        Supplier d = null;
+        d = dDao.searchSupplier(noInduk);
+        
+        return d;
     }
     
     public List<Supplier> showListSupplier() {

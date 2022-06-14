@@ -339,12 +339,13 @@ public class ViewGudang extends javax.swing.JFrame {
             ContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ContainerLayout.createSequentialGroup()
                 .addGap(24, 24, 24)
-                .addGroup(ContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tambahButton)
-                    .addComponent(hapusButton)
+                .addGroup(ContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(ContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnSearch)
-                        .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(ContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(tambahButton)
+                        .addComponent(hapusButton)))
                 .addGap(27, 27, 27)
                 .addComponent(inputLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -488,9 +489,24 @@ public class ViewGudang extends javax.swing.JFrame {
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         // TODO add your handling code here:
         // Ketika button cari diklik maka akan menonaktifkan component Input
+        setEditDeleteBtn(true);
         setComponent(false);
-
-   
+        
+        try {
+            Gudang gudang = gudangControl.searchGudang(txtSearch.getText());
+            if(gudang == null) {
+                clearText();
+                setEditDeleteBtn(false);
+                JOptionPane.showConfirmDialog(null, "Data tidak ditemukan",
+                    "Konfirmasi", JOptionPane.DEFAULT_OPTION);
+            } else {
+                input1.setText(gudang.getKodeGudang());
+                input2.setText(gudang.getNamaGudang());
+                input3.setText(gudang.getAlamatGudang());
+            }
+        } catch(Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        } 
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void txtSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchActionPerformed

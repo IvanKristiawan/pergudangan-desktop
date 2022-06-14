@@ -73,6 +73,42 @@ public class ManagerDAO {
         
         return list;
     }
+
+    public Manager searchManager(String noInduk) {
+        con = dbCon.makeConnection();
+        
+        String sql = "SELECT * FROM manager WHERE kodeManager = '" + noInduk + "'";
+        System.out.println("Searching Manager...");
+        Manager d = null;
+        
+        try {
+            Statement statement = con.createStatement();
+            ResultSet rs = statement.executeQuery(sql);
+            
+            if(rs != null) {
+                while(rs.next()) {
+                    Gudang g = new Gudang (
+                        rs.getString("d.kodeGudang"),
+                        rs.getString("d.namaGudang"),
+                        rs.getString("d.alamatGudang")
+                    );
+                    d = new Manager(
+                            rs.getString("mk.kodeManager"), 
+                            rs.getString("mk.namaManager"), 
+                            g
+                        );
+                }
+            }
+            rs.close();
+            statement.close();
+        } catch(Exception e) {
+            System.out.println("Error reading database...");
+            System.out.println(e);
+        } 
+        dbCon.closeConnection();
+        
+        return d;
+    }
     
     public void deleteManager(String noInduk) {
         con = dbCon.makeConnection();

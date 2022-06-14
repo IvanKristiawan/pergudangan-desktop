@@ -22,6 +22,7 @@ public class ViewStok extends javax.swing.JFrame {
     private GudangControl gudangControl;
     private SupplierControl supplierControl;
     List<Gudang> listGudang;
+    List<Stok> listStok;
     List<Supplier> listSupplier;
     String action = null;
     /**
@@ -32,8 +33,8 @@ public class ViewStok extends javax.swing.JFrame {
         setComponent(true);
         setEditDeleteBtn(false);
         gudangControl = new GudangControl();
-        supplierControl = new SupplierControl();
         stokControl = new StokControl();
+        supplierControl = new SupplierControl();
         showStok();
         setGudangToDropdown();
         setSupplierToDropdown();
@@ -62,14 +63,14 @@ public class ViewStok extends javax.swing.JFrame {
     public void setGudangToDropdown() {
         listGudang = gudangControl.showListGudang();
         for (int i = 1; i < listGudang.size(); i++){
-            dropdown1.addItem(listGudang.get(i));
+            dropdown.addItem(listGudang.get(i));
         } 
     }
     
     public void setSupplierToDropdown() {
         listSupplier = supplierControl.showListSupplier();
         for (int i = 1; i < listSupplier.size(); i++){
-            dropdown.addItem(listSupplier.get(i));
+            dropdown1.addItem(listSupplier.get(i));
         } 
     }
     
@@ -391,12 +392,13 @@ public class ViewStok extends javax.swing.JFrame {
             ContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ContainerLayout.createSequentialGroup()
                 .addContainerGap(27, Short.MAX_VALUE)
-                .addGroup(ContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tambahButton)
-                    .addComponent(hapusButton)
+                .addGroup(ContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(ContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnSearch)
-                        .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(ContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(tambahButton)
+                        .addComponent(hapusButton)))
                 .addGap(18, 18, 18)
                 .addGroup(ContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(ContainerLayout.createSequentialGroup()
@@ -534,7 +536,7 @@ public class ViewStok extends javax.swing.JFrame {
 
     private void TabSupplierMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabSupplierMouseClicked
         // TODO add your handling code here:
-        ViewSupplier dv = new ViewSupplier();
+        ViewStok dv = new ViewStok();
         this.dispose();
         dv.setVisible(true);
     }//GEN-LAST:event_TabSupplierMouseClicked
@@ -549,7 +551,24 @@ public class ViewStok extends javax.swing.JFrame {
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         // TODO add your handling code here:
         // Ketika button cari diklik maka akan menonaktifkan component Input
+        setEditDeleteBtn(true);
         setComponent(false);
+        
+        try {
+            Stok stok = stokControl.searchStok(txtSearch.getText());
+            if(stok == null) {
+                clearText();
+                setEditDeleteBtn(false);
+                JOptionPane.showConfirmDialog(null, "Data tidak ditemukan",
+                    "Konfirmasi", JOptionPane.DEFAULT_OPTION);
+            } else {
+                input1.setText(stok.getKodeStok());
+                input2.setText(stok.getNamaStok());
+                input3.setText(Integer.toString(stok.getKuantitas()));
+            }
+        } catch(Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        } 
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void txtSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchActionPerformed
@@ -606,8 +625,8 @@ public class ViewStok extends javax.swing.JFrame {
     private javax.swing.JLabel Title;
     private javax.swing.JPanel TopBar;
     private javax.swing.JButton btnSearch;
-    private javax.swing.JComboBox<Supplier> dropdown;
-    private javax.swing.JComboBox<Gudang> dropdown1;
+    private javax.swing.JComboBox<Gudang> dropdown;
+    private javax.swing.JComboBox<Supplier> dropdown1;
     private javax.swing.JLabel gudang;
     private javax.swing.JButton hapusButton;
     private javax.swing.JTextField input1;

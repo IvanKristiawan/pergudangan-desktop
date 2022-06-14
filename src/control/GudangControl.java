@@ -27,6 +27,13 @@ public class GudangControl {
         
         return dosenString;
     }
+
+    public Gudang searchGudang(String noInduk) {
+        Gudang d = null;
+        d = dDao.searchGudang(noInduk);
+        
+        return d;
+    }
     
     public void deleteDataGudang(String noInduk) {
         dDao.deleteGudang(noInduk);

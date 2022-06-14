@@ -71,6 +71,37 @@ public class SupplierDAO {
         
         return list;
     }
+
+    public Supplier searchSupplier(String noInduk) {
+        con = dbCon.makeConnection();
+        
+        String sql = "SELECT * FROM supplier WHERE kodeSupplier = '" + noInduk + "'";
+        System.out.println("Searching Supplier...");
+        Supplier d = null;
+        
+        try {
+            Statement statement = con.createStatement();
+            ResultSet rs = statement.executeQuery(sql);
+            
+            if(rs != null) {
+                while(rs.next()) {
+                    d = new Supplier(
+                            rs.getString("kodeSupplier"),
+                            rs.getString("namaSupplier"),
+                            rs.getString("alamatSupplier")
+                        );
+                }
+            }
+            rs.close();
+            statement.close();
+        } catch(Exception e) {
+            System.out.println("Error reading database...");
+            System.out.println(e);
+        } 
+        dbCon.closeConnection();
+        
+        return d;
+    }
     
     public void deleteSupplier(String noInduk) {
         con = dbCon.makeConnection();

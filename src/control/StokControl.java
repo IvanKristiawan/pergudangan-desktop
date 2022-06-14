@@ -25,6 +25,13 @@ public class StokControl {
         return tableStok;
     }
     
+    public Stok searchStok(String noInduk) {
+        Stok d = null;
+        d = dDao.searchStok(noInduk);
+        
+        return d;
+    }
+    
     public void deleteDataStok(String noInduk) {
         dDao.deleteStok(noInduk);
     }
