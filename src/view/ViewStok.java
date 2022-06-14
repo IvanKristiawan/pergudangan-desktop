@@ -124,6 +124,8 @@ public class ViewStok extends javax.swing.JFrame {
         dropdown1 = new javax.swing.JComboBox<>();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        btnSearch = new javax.swing.JButton();
+        txtSearch = new javax.swing.JTextField();
         BottomBar = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
 
@@ -326,6 +328,19 @@ public class ViewStok extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(jTable1);
 
+        btnSearch.setText("Cari");
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchActionPerformed(evt);
+            }
+        });
+
+        txtSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSearchActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout ContainerLayout = new javax.swing.GroupLayout(Container);
         Container.setLayout(ContainerLayout);
         ContainerLayout.setHorizontalGroup(
@@ -335,10 +350,6 @@ public class ViewStok extends javax.swing.JFrame {
                 .addGroup(ContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(ContainerLayout.createSequentialGroup()
                         .addGroup(ContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(ContainerLayout.createSequentialGroup()
-                                .addComponent(tambahButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(hapusButton))
                             .addGroup(ContainerLayout.createSequentialGroup()
                                 .addGroup(ContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(inputLabel1)
@@ -365,7 +376,16 @@ public class ViewStok extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ContainerLayout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(simpanButton)
-                                .addGap(91, 91, 91))))))
+                                .addGap(91, 91, 91))))
+                    .addGroup(ContainerLayout.createSequentialGroup()
+                        .addComponent(tambahButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(hapusButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnSearch)
+                        .addGap(55, 55, 55))))
         );
         ContainerLayout.setVerticalGroup(
             ContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -373,7 +393,10 @@ public class ViewStok extends javax.swing.JFrame {
                 .addContainerGap(27, Short.MAX_VALUE)
                 .addGroup(ContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tambahButton)
-                    .addComponent(hapusButton))
+                    .addComponent(hapusButton)
+                    .addGroup(ContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnSearch)
+                        .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(ContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(ContainerLayout.createSequentialGroup()
@@ -523,6 +546,16 @@ public class ViewStok extends javax.swing.JFrame {
         dv.setVisible(true);
     }//GEN-LAST:event_TabStokMouseClicked
 
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+        // TODO add your handling code here:
+        // Ketika button cari diklik maka akan menonaktifkan component Input
+        setComponent(false);
+    }//GEN-LAST:event_btnSearchActionPerformed
+
+    private void txtSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSearchActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -572,6 +605,7 @@ public class ViewStok extends javax.swing.JFrame {
     private javax.swing.JPanel TabSupplier;
     private javax.swing.JLabel Title;
     private javax.swing.JPanel TopBar;
+    private javax.swing.JButton btnSearch;
     private javax.swing.JComboBox<Supplier> dropdown;
     private javax.swing.JComboBox<Gudang> dropdown1;
     private javax.swing.JLabel gudang;
@@ -590,5 +624,6 @@ public class ViewStok extends javax.swing.JFrame {
     private javax.swing.JButton simpanButton;
     private javax.swing.JLabel supplier;
     private javax.swing.JButton tambahButton;
+    private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables
 }

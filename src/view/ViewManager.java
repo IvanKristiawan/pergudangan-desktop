@@ -122,6 +122,8 @@ public class ViewManager extends javax.swing.JFrame {
         dropdown = new javax.swing.JComboBox<>();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        btnSearch = new javax.swing.JButton();
+        txtSearch = new javax.swing.JTextField();
         BottomBar = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
 
@@ -326,22 +328,31 @@ public class ViewManager extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(jTable1);
 
+        btnSearch.setText("Cari");
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchActionPerformed(evt);
+            }
+        });
+
+        txtSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSearchActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout ContainerLayout = new javax.swing.GroupLayout(Container);
         Container.setLayout(ContainerLayout);
         ContainerLayout.setHorizontalGroup(
             ContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ContainerLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(ContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addContainerGap(37, Short.MAX_VALUE)
+                .addGroup(ContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ContainerLayout.createSequentialGroup()
                         .addGroup(ContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 834, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(inputLabel3)
                             .addComponent(dropdown, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(ContainerLayout.createSequentialGroup()
-                                .addComponent(tambahButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(hapusButton))
                             .addGroup(ContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(inputLabel2)
                                 .addComponent(inputLabel1)
@@ -350,7 +361,16 @@ public class ViewManager extends javax.swing.JFrame {
                         .addGap(29, 29, 29))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ContainerLayout.createSequentialGroup()
                         .addComponent(simpanButton)
-                        .addGap(166, 166, 166))))
+                        .addGap(166, 166, 166))
+                    .addGroup(ContainerLayout.createSequentialGroup()
+                        .addComponent(tambahButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(hapusButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnSearch)
+                        .addGap(55, 55, 55))))
         );
         ContainerLayout.setVerticalGroup(
             ContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -360,7 +380,10 @@ public class ViewManager extends javax.swing.JFrame {
                         .addGap(17, 17, 17)
                         .addGroup(ContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(tambahButton)
-                            .addComponent(hapusButton))
+                            .addComponent(hapusButton)
+                            .addGroup(ContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(btnSearch)
+                                .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(inputLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -504,6 +527,17 @@ public class ViewManager extends javax.swing.JFrame {
         dv.setVisible(true);
     }//GEN-LAST:event_TabStokMouseClicked
 
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+        // TODO add your handling code here:
+        // Ketika button cari diklik maka akan menonaktifkan component Input
+        setComponent(false);
+
+    }//GEN-LAST:event_btnSearchActionPerformed
+
+    private void txtSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSearchActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -553,6 +587,7 @@ public class ViewManager extends javax.swing.JFrame {
     private javax.swing.JPanel TabSupplier;
     private javax.swing.JLabel Title;
     private javax.swing.JPanel TopBar;
+    private javax.swing.JButton btnSearch;
     private javax.swing.JComboBox<Gudang> dropdown;
     private javax.swing.JLabel gudang;
     private javax.swing.JButton hapusButton;
@@ -567,5 +602,6 @@ public class ViewManager extends javax.swing.JFrame {
     private javax.swing.JButton simpanButton;
     private javax.swing.JLabel supplier;
     private javax.swing.JButton tambahButton;
+    private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables
 }

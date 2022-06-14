@@ -93,6 +93,8 @@ public class ViewGudang extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         outputArea = new javax.swing.JTextArea();
         simpanButton = new javax.swing.JButton();
+        txtSearch = new javax.swing.JTextField();
+        btnSearch = new javax.swing.JButton();
         BottomBar = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
 
@@ -288,6 +290,19 @@ public class ViewGudang extends javax.swing.JFrame {
             }
         });
 
+        txtSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSearchActionPerformed(evt);
+            }
+        });
+
+        btnSearch.setText("Cari");
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout ContainerLayout = new javax.swing.GroupLayout(Container);
         Container.setLayout(ContainerLayout);
         ContainerLayout.setHorizontalGroup(
@@ -299,19 +314,26 @@ public class ViewGudang extends javax.swing.JFrame {
             .addGroup(ContainerLayout.createSequentialGroup()
                 .addGap(42, 42, 42)
                 .addGroup(ContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 792, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(ContainerLayout.createSequentialGroup()
+                        .addGroup(ContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 792, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(ContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(inputLabel3)
+                                .addComponent(inputLabel2)
+                                .addComponent(inputLabel1)
+                                .addComponent(input2)
+                                .addComponent(input1)
+                                .addComponent(input3, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(48, Short.MAX_VALUE))
                     .addGroup(ContainerLayout.createSequentialGroup()
                         .addComponent(tambahButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(hapusButton))
-                    .addGroup(ContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(inputLabel3)
-                        .addComponent(inputLabel2)
-                        .addComponent(inputLabel1)
-                        .addComponent(input2)
-                        .addComponent(input1)
-                        .addComponent(input3, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(hapusButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnSearch)
+                        .addGap(36, 36, 36))))
         );
         ContainerLayout.setVerticalGroup(
             ContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -319,8 +341,11 @@ public class ViewGudang extends javax.swing.JFrame {
                 .addGap(24, 24, 24)
                 .addGroup(ContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tambahButton)
-                    .addComponent(hapusButton))
-                .addGap(18, 18, 18)
+                    .addComponent(hapusButton)
+                    .addGroup(ContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnSearch)
+                        .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(27, 27, 27)
                 .addComponent(inputLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(input1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -335,7 +360,7 @@ public class ViewGudang extends javax.swing.JFrame {
                 .addGap(42, 42, 42)
                 .addComponent(simpanButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 489, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 480, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -460,6 +485,18 @@ public class ViewGudang extends javax.swing.JFrame {
         dv.setVisible(true);
     }//GEN-LAST:event_TabStokMouseClicked
 
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+        // TODO add your handling code here:
+        // Ketika button cari diklik maka akan menonaktifkan component Input
+        setComponent(false);
+
+   
+    }//GEN-LAST:event_btnSearchActionPerformed
+
+    private void txtSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSearchActionPerformed
+
    
     /**
      * @param args the command line arguments
@@ -508,6 +545,7 @@ public class ViewGudang extends javax.swing.JFrame {
     private javax.swing.JPanel TabSupplier;
     private javax.swing.JLabel Title;
     private javax.swing.JPanel TopBar;
+    private javax.swing.JButton btnSearch;
     private javax.swing.JLabel gudang;
     private javax.swing.JButton hapusButton;
     private javax.swing.JTextField input1;
@@ -522,5 +560,6 @@ public class ViewGudang extends javax.swing.JFrame {
     private javax.swing.JButton simpanButton;
     private javax.swing.JLabel supplier;
     private javax.swing.JButton tambahButton;
+    private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables
 }
