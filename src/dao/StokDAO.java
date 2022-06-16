@@ -25,7 +25,7 @@ public class StokDAO {
         
         String sql = "INSERT INTO stok(kodeStok, namaStok, kuantitas, kodeSupplier, kodeGudang)"
                 + "VALUES ('" + d.getKodeStok() + "', '" + d.getNamaStok() + "', '"
-                + d.getKuantitas() + "', '" + d.getKuantitas() + "', '"
+                + d.getKuantitas() + "', '" 
                 + d.getKodeSupplier().getKodeSupplier() + "', '" + d.getKodeGudang().getKodeGudang() + "')";
         
         System.out.println("Adding Stok...");
@@ -45,10 +45,7 @@ public class StokDAO {
     public List<Stok> showStok(String query) {
         con = dbCon.makeConnection();
         
-        String sql = "SELECT mk.*, d.*, g.* FROM stok as mk JOIN supplier as d ON d.kodeSupplier = mk.kodeSupplier"
-                + "JOIN gudang as g ON d.kodeGudang = g.kodeGudang "
-                + " WHERE (mk.kodeSupplier LIKE "
-                + "'%" + query + "%'"
+        String sql = "SELECT mk.*, d.*, g.* FROM stok as mk JOIN supplier as d ON d.kodeSupplier = mk.kodeSupplier JOIN gudang as g ON g.kodeGudang = mk.kodeGudang  WHERE (mk.kodeStok LIKE " + "'%" + query + "%'"
                 + "OR mk.kodeGudang LIKE '%" + query + "%')";
         System.out.println("Mengambil Stok...");
         List<Stok> list = new ArrayList();
@@ -87,7 +84,7 @@ public class StokDAO {
     public Stok searchStok(String noInduk) {
         con = dbCon.makeConnection();
         
-        String sql = "SELECT * FROM stok WHERE nomor_induk_stok = '" + noInduk + "'";
+        String sql = "SELECT * FROM stok WHERE  kodeStok = '" + noInduk + "'";
         System.out.println("Searching Stok...");
         Stok d = null;
         

@@ -46,4 +46,6 @@ public class Manager {
     public String showDataManager() {
         return this.kodeManager + " | " + this.namaManager + " | " + this.kodeGudang;
     }
+    
+    
 }

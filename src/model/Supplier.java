@@ -42,8 +42,14 @@ public class Supplier {
     public void setAlamatSupplier(String alamatSupplier) {
         this.alamatSupplier = alamatSupplier;
     }
-    
+
     public String showDataSupplier() {
         return this.kodeSupplier + " | " + this.namaSupplier + " | " + this.alamatSupplier;
+    }
+
+    @Override
+    public String toString() {
+
+        return kodeSupplier;
     }
 }

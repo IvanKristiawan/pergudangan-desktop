@@ -38,11 +38,13 @@ public class TableStok extends AbstractTableModel {
             case 3:
                 return list.get(rowIndex).getKodeSupplier().getKodeSupplier();
             case 4:
-                return list.get(rowIndex).getKodeSupplier().getNamaSupplier();
+                   return list.get(rowIndex).getKodeGudang().getKodeGudang();
+              
             case 5:
                 return list.get(rowIndex).getKodeSupplier().getAlamatSupplier();
             case 6:
-                return list.get(rowIndex).getKodeGudang().getKodeGudang();
+                  return list.get(rowIndex).getKodeSupplier().getNamaSupplier();
+              
             case 7:
                 return list.get(rowIndex).getKodeGudang().getNamaGudang();
             case 8:

@@ -42,8 +42,14 @@ public class Gudang {
     public void setAlamatGudang(String alamatGudang) {
         this.alamatGudang = alamatGudang;
     }
-    
+
     public String showDataGudang() {
         return this.kodeGudang + " | " + this.namaGudang + " | " + this.alamatGudang;
+    }
+
+    @Override
+    public String toString() {
+
+        return kodeGudang;
     }
 }
