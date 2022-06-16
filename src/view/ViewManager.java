@@ -71,7 +71,7 @@ public class ViewManager extends javax.swing.JFrame {
     public void setGudangToDropdown() {
         listGudang = gudangControl.showListGudang();
         for (int i = 0; i < listGudang.size(); i++){
-            dropdown.addItem(listGudang.get(i));
+            dropdown.addItem(listGudang.get(i).getKodeGudang());
         } 
     }
     
@@ -604,7 +604,7 @@ public class ViewManager extends javax.swing.JFrame {
     private javax.swing.JLabel Title;
     private javax.swing.JPanel TopBar;
     private javax.swing.JButton btnSearch;
-    private javax.swing.JComboBox<Gudang> dropdown;
+    private javax.swing.JComboBox<String> dropdown;
     private javax.swing.JLabel gudang;
     private javax.swing.JButton hapusButton;
     private javax.swing.JTextField input1;
