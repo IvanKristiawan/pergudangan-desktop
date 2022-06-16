@@ -24,7 +24,7 @@ public class ManagerDAO {
         
         String sql = "INSERT INTO manager(kodeManager, namaManager, kodeGudang)"
                 + "VALUES ('" + d.getKodeManager() + "', '" + d.getNamaManager() + "', '"
-                + d.getKodeGudang() + "')";
+                + d.getKodeGudang().getKodeGudang() + "')";
         
         System.out.println("Adding Manager...");
         

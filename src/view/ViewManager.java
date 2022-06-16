@@ -6,6 +6,7 @@ package view;
 import control.GudangControl;
 import control.ManagerControl;
 import java.util.List;
+import javax.swing.table.TableModel;
 import exception.InputKosongException;
 import exception.NoKodeException;
 import javax.swing.JOptionPane;
@@ -42,21 +43,6 @@ public class ViewManager extends javax.swing.JFrame {
         
         tambahButton.setEnabled(true);
         simpanButton.setEnabled(value);
-        
-        try {
-            TableManager manager = managerControl.showManager("");
-            if(manager.getRowCount() == 0) {
-                clearText();
-                setEditDeleteBtn(false);
-                JOptionPane.showConfirmDialog(null, "Data tidak ditemukan",
-                    "Konfirmasi", JOptionPane.DEFAULT_OPTION);
-            } else {
-                jTable1.setModel(manager);
-            }
-            clearText();
-        } catch(Exception e) {
-            System.out.println("Error: " + e.getMessage());
-        } 
     }
     
     public void setEditDeleteBtn(boolean value) {
@@ -71,7 +57,7 @@ public class ViewManager extends javax.swing.JFrame {
     public void setGudangToDropdown() {
         listGudang = gudangControl.showListGudang();
         for (int i = 0; i < listGudang.size(); i++){
-            dropdown.addItem(listGudang.get(i).getKodeGudang());
+            dropdown.addItem(listGudang.get(i));
         } 
     }
     
@@ -326,6 +312,11 @@ public class ViewManager extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(jTable1);
 
         btnSearch.setText("Cari");
@@ -486,9 +477,10 @@ public class ViewManager extends javax.swing.JFrame {
             NoKodeException();
             int selectedIndex = dropdown.getSelectedIndex();
             Gudang selectedGudang = listGudang.get(selectedIndex);
-            
+
             Manager d = new Manager(input1.getText(), input2.getText(), selectedGudang);
             managerControl.insertDataManager(d);
+
             clearText();
             showManager();
             setComponent(false);
@@ -533,26 +525,43 @@ public class ViewManager extends javax.swing.JFrame {
         // Ketika button cari diklik maka akan menonaktifkan component Input
         setEditDeleteBtn(true);
         setComponent(false);
-        
-        try {
-            Manager manager = managerControl.searchManager(txtSearch.getText());
-            if(manager == null) {
-                clearText();
-                setEditDeleteBtn(false);
-                JOptionPane.showConfirmDialog(null, "Data tidak ditemukan",
-                    "Konfirmasi", JOptionPane.DEFAULT_OPTION);
-            } else {
-                input1.setText(manager.getKodeManager());
-                input2.setText(manager.getNamaManager());
-            }
-        } catch(Exception e) {
-            System.out.println("Error: " + e.getMessage());
-        } 
+
+        TableManager manager = managerControl.showManager(txtSearch.getText());
+
+        if(manager.getRowCount() == 0) {
+            setEditDeleteBtn(false);
+            JOptionPane.showConfirmDialog(null, "Data tidak ditemukan", "Konfirmasi", JOptionPane.DEFAULT_OPTION);
+        } else {
+            jTable1.setModel(manager);
+        }
+
+        clearText();
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void txtSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtSearchActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // TODO add your handling code here:
+        int indexProdi = -1;
+        setEditDeleteBtn(true);
+        setComponent(false);
+        
+        int clickedRow = jTable1.getSelectedRow();
+        TableModel tm = jTable1.getModel();
+
+        input1.setText(tm.getValueAt(clickedRow, 0).toString());
+        input2.setText(tm.getValueAt(clickedRow, 1).toString());
+
+        String kode_manager = tm.getValueAt(clickedRow, 3).toString();
+        for(Manager manager : listManager) {
+            if (manager.getKodeManager().equals(kode_manager)) {
+                indexProdi = listManager.indexOf(manager);
+            }
+        }
+        dropdown.setSelectedIndex(indexProdi);
+    }//GEN-LAST:event_jTable1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -604,7 +613,7 @@ public class ViewManager extends javax.swing.JFrame {
     private javax.swing.JLabel Title;
     private javax.swing.JPanel TopBar;
     private javax.swing.JButton btnSearch;
-    private javax.swing.JComboBox<String> dropdown;
+    private javax.swing.JComboBox<Gudang> dropdown;
     private javax.swing.JLabel gudang;
     private javax.swing.JButton hapusButton;
     private javax.swing.JTextField input1;
