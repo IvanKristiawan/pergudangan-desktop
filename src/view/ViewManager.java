@@ -70,7 +70,7 @@ public class ViewManager extends javax.swing.JFrame {
     
     public void setGudangToDropdown() {
         listGudang = gudangControl.showListGudang();
-        for (int i = 1; i < listGudang.size(); i++){
+        for (int i = 0; i < listGudang.size(); i++){
             dropdown.addItem(listGudang.get(i));
         } 
     }

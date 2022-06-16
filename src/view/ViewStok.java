@@ -62,14 +62,14 @@ public class ViewStok extends javax.swing.JFrame {
     
     public void setGudangToDropdown() {
         listGudang = gudangControl.showListGudang();
-        for (int i = 1; i < listGudang.size(); i++){
+        for (int i = 0; i < listGudang.size(); i++){
             dropdown.addItem(listGudang.get(i));
         } 
     }
     
     public void setSupplierToDropdown() {
         listSupplier = supplierControl.showListSupplier();
-        for (int i = 1; i < listSupplier.size(); i++){
+        for (int i = 0; i < listSupplier.size(); i++){
             dropdown1.addItem(listSupplier.get(i));
         } 
     }
