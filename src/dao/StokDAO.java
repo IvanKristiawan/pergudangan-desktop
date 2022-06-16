@@ -26,7 +26,7 @@ public class StokDAO {
         String sql = "INSERT INTO stok(kodeStok, namaStok, kuantitas, kodeSupplier, kodeGudang)"
                 + "VALUES ('" + d.getKodeStok() + "', '" + d.getNamaStok() + "', '"
                 + d.getKuantitas() + "', '" + d.getKuantitas() + "', '"
-                + d.getKodeSupplier() + "', '" + d.getKodeGudang() + "')";
+                + d.getKodeSupplier().getKodeSupplier() + "', '" + d.getKodeGudang().getKodeGudang() + "')";
         
         System.out.println("Adding Stok...");
         

@@ -6,6 +6,7 @@ package view;
 import control.StokControl;
 import control.GudangControl;
 import control.SupplierControl;
+import javax.swing.table.TableModel;
 import java.util.List;
 import exception.InputKosongException;
 import exception.NoKodeException;
@@ -63,14 +64,14 @@ public class ViewStok extends javax.swing.JFrame {
     public void setGudangToDropdown() {
         listGudang = gudangControl.showListGudang();
         for (int i = 0; i < listGudang.size(); i++){
-            dropdown.addItem(listGudang.get(i).getKodeGudang());
+            dropdown.addItem(listGudang.get(i));
         } 
     }
     
     public void setSupplierToDropdown() {
         listSupplier = supplierControl.showListSupplier();
         for (int i = 0; i < listSupplier.size(); i++){
-            dropdown1.addItem(listSupplier.get(i).getKodeSupplier());
+            dropdown1.addItem(listSupplier.get(i));
         } 
     }
     
@@ -327,6 +328,11 @@ public class ViewStok extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(jTable1);
 
         btnSearch.setText("Cari");
@@ -505,10 +511,11 @@ public class ViewStok extends javax.swing.JFrame {
             int selectedIndex = dropdown.getSelectedIndex();
             Gudang selectedGudang = listGudang.get(selectedIndex);
             int selectedIndex1 = dropdown1.getSelectedIndex();
-            Supplier selectedSupplier = listSupplier.get(selectedIndex);
+            Supplier selectedSupplier = listSupplier.get(selectedIndex1);
             
             Stok d = new Stok(input1.getText(), input2.getText(), Integer.parseInt(input3.getText()), selectedSupplier, selectedGudang);
             stokControl.insertDataStok(d);
+
             clearText();
             showStok();
             setComponent(false);
@@ -575,6 +582,28 @@ public class ViewStok extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtSearchActionPerformed
 
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // TODO add your handling code here:
+        int indexProdi = -1;
+        setEditDeleteBtn(true);
+        setComponent(false);
+        
+        int clickedRow = jTable1.getSelectedRow();
+        TableModel tm = jTable1.getModel();
+
+        input1.setText(tm.getValueAt(clickedRow, 0).toString());
+        input2.setText(tm.getValueAt(clickedRow, 1).toString());
+        input3.setText(tm.getValueAt(clickedRow, 2).toString());
+
+        String kode_stok = tm.getValueAt(clickedRow, 3).toString();
+        for(Stok stok : listStok) {
+            if (stok.getKodeStok().equals(kode_stok)) {
+                indexProdi = listStok.indexOf(stok);
+            }
+        }
+        dropdown.setSelectedIndex(indexProdi);
+    }//GEN-LAST:event_jTable1MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -625,8 +654,8 @@ public class ViewStok extends javax.swing.JFrame {
     private javax.swing.JLabel Title;
     private javax.swing.JPanel TopBar;
     private javax.swing.JButton btnSearch;
-    private javax.swing.JComboBox<String> dropdown;
-    private javax.swing.JComboBox<String> dropdown1;
+    private javax.swing.JComboBox<Gudang> dropdown;
+    private javax.swing.JComboBox<Supplier> dropdown1;
     private javax.swing.JLabel gudang;
     private javax.swing.JButton hapusButton;
     private javax.swing.JTextField input1;
